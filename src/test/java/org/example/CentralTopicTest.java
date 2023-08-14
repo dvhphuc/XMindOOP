@@ -50,7 +50,7 @@ class CentralTopicTest {
     }
 
     @Test
-    void moveChild2OtherChild() {
+    void testMoveChild2OtherChild() {
         Topic mainTopic1 = new Topic("Main Topic 1");
         Topic mainTopic2 = new Topic("Main Topic 2");
         centralTopic.appendChild(mainTopic1);
@@ -60,5 +60,33 @@ class CentralTopicTest {
 
         assertEquals(1,centralTopic.children.size());
         assertEquals(1,mainTopic1.children.size());
+    }
+
+    @Test
+    void testAddRelationship() {
+        Topic mainTopic1 = new Topic("Main Topic 1");
+        Topic mainTopic2 = new Topic("Main Topic 2");
+        centralTopic.appendChild(mainTopic1);
+        centralTopic.appendChild(mainTopic2);
+
+        mainTopic1.addRelationship(mainTopic2);
+
+        assertEquals(1,mainTopic1.relationshipedTopic.size());
+    }
+
+    @Test
+    void removeRaltionship() {
+        Topic mainTopic1 = new Topic("Main Topic 1");
+        Topic mainTopic2 = new Topic("Main Topic 2");
+        centralTopic.appendChild(mainTopic1);
+        centralTopic.appendChild(mainTopic2);
+
+        mainTopic1.addRelationship(mainTopic2);
+
+        assertEquals(1,mainTopic1.relationshipedTopic.size());
+
+        mainTopic1.removeRaltionship(mainTopic2);
+
+        assertEquals(0,mainTopic1.relationshipedTopic.size());
     }
 }
